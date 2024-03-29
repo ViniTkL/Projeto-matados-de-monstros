@@ -71,11 +71,44 @@ new Vue({
         giveUp(){
             this.gameEnd = true;
             this.isPlayerWinner = false;
-        }
-   },
+        },
+        monsterLifeBarCalc(){
+            return 100 - [100*(1-this.monsterLife/100)]
+        },
+        playerLifeBarCalc(){
+            return 100 - [100*(1-this.playerLife/100)]
+        },
+
+    },
    computed: {
     gameLog(){
         return this.logs
     },
+    monsterLifeBar(){
+        return {
+            width: `${this.monsterLifeBarCalc()}% `
+        }
+    },
+    playerLifeBar(){
+        return {
+            width: `${this.playerLifeBarCalc()}% `
+        }
+    },
+    playerLifeColor(){
+        if(this.playerLifeBarCalc() < 20){
+            return {
+                danger: true
+            }
+        }
+        return ''
+    },
+    monsterLifeColor(){
+        if(this.monsterLifeBarCalc() < 20){
+            return {
+                danger: true
+            }
+        }
+        return ''
+    }
    }
 })
