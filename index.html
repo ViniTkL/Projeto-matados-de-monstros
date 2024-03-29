@@ -14,14 +14,14 @@
                 <div class="life-bar">
                     <div class="life"></div>
                 </div>
-                <div></div>
+                <div>{{playerLife}}%</div>
             </div>
             <div class="score">
                 <h1>Monstro</h1>
                 <div class="life-bar">
                     <div class="life"></div>
                 </div>
-                <div></div>
+                <div>{{monsterLife}}%</div>
             </div>
         </div>
         <div class="panel result" v-if="gameEnd">
@@ -31,15 +31,16 @@
         <div class="panel buttons">
             <template v-if="!gameEnd">
                 <button class="btn attack" @click="attack">Ataque</button>
-                <button class="btn especial-attack" @click="">Ataque Especial</button>
-                <button class="btn heal" @click="">Curar</button>
-                <button class="btn give-up" @click="">Desistir</button>
+                <button class="btn especial-attack" @click="specialAttack">Ataque Especial</button>
+                <button class="btn heal" @click="heal">Curar</button>
+                <button class="btn give-up" @click="giveUp">Desistir</button>
             </template>
-            <button class="btn new-game" v-if="gameEnd">Iniciar Jogo</button>
+            <button class="btn new-game" v-if="gameEnd" @click="resetGame">Iniciar Jogo</button>
         </div>
-        <div class="panel logs">
-            <ul>
-                <li></li>
+        <div class="panel logs" v-if="gameLog.length">
+            <ul v-for="log in gameLog">
+                <li class="player">{{log.player}}</li>
+                <li class="monster">{{log.monster}}</li>
             </ul>
         </div>
     </div>
